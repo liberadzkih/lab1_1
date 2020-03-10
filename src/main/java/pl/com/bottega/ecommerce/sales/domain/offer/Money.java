@@ -6,9 +6,9 @@ public class Money {
     private String currency;
     private BigDecimal value;
 
-    public Money(BigDecimal value)
+    public Money()
     {
-
+        this.value = new BigDecimal(0);
     }
 
     public String getCurrency(){

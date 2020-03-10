@@ -18,22 +18,12 @@ import java.util.Objects;
 
 public class OfferItem {
 
-    // product
-    private String productId;
-
-    private BigDecimal productPrice;
-
-    private String productName;
-
-    private Date productSnapshotDate;
-
-    private String productType;
 
     private int quantity;
 
     private Money totalCost;
 
-    //private String currency;
+    private String currency;
 
     // discount
     private String discountCause;
@@ -45,13 +35,9 @@ public class OfferItem {
         this(productId, productPrice, productName, productSnapshotDate, productType, quantity, null, null);
     }
 
-    public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate, String productType,
+    public OfferItem(
             int quantity, BigDecimal discount, String discountCause) {
-        this.productId = productId;
-        this.productPrice = productPrice;
-        this.productName = productName;
-        this.productSnapshotDate = productSnapshotDate;
-        this.productType = productType;
+
 
         this.quantity = quantity;
         this.discount = discount;
@@ -62,32 +48,15 @@ public class OfferItem {
             discountValue = discountValue.add(discount);
         }
 
-        /*this.totalCost = productPrice.multiply(new BigDecimal(quantity))
-                                     .subtract(discountValue);*/
+        totalCost = new Money();
+
+        this.totalCost.setValue(productPrice.multiply(new BigDecimal(quantity))
+                      .subtract(discountValue));
 
         //this.totalCost.getValue()
     }
 
-    public String getProductId() {
-        return productId;
-    }
-
-    public BigDecimal getProductPrice() {
-        return productPrice;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public Date getProductSnapshotDate() {
-        return productSnapshotDate;
-    }
-
-    public String getProductType() {
-        return productType;
-    }
-
+    
     /*public BigDecimal getTotalCost() {
         return totalCost;
     }
@@ -111,7 +80,7 @@ public class OfferItem {
     @Override
     public int hashCode() {
         return Objects.hash(currency, discount, discountCause, productId, productName, productPrice, productSnapshotDate, productType,
-                quantity, totalCost);
+                quantity, totalCost.getValue());
     }
 
     @Override
