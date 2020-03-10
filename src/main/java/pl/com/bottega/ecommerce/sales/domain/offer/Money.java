@@ -3,6 +3,7 @@ package pl.com.bottega.ecommerce.sales.domain.offer;
 import java.math.BigDecimal;
 
 public class Money {
+
     private BigDecimal value;
     private String currency;
 
@@ -11,11 +12,11 @@ public class Money {
         this.currency = currency;
     }
 
-    BigDecimal getValue() {
+    public BigDecimal getValue() {
         return this.value;
     }
 
-    String getCurrency() {
+    public String getCurrency() {
         return this.currency;
     }
 }

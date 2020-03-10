@@ -79,7 +79,8 @@ public class Offer {
 
     private OfferItem findItem(String productId) {
         for (OfferItem item : availableItems) {
-            if (item.getProductId().equals(productId)) {
+            if (item.getProductId()
+                    .equals(productId)) {
                 return item;
             }
         }
