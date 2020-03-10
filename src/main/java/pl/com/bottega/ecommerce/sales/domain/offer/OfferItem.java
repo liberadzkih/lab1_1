@@ -19,15 +19,8 @@ import java.util.Objects;
 public class OfferItem {
 
     // product
-    private String productId;
 
     private BigDecimal productPrice;
-
-    private String productName;
-
-    private Date productSnapshotDate;
-
-    private String productType;
 
     private int quantity;
 
@@ -62,31 +55,14 @@ public class OfferItem {
             discountValue = discountValue.add(discount);
         }
 
-        totalcost = new Money(0);
-       //this.totalcost.getValue()= productPrice.multiply(new BigDecimal(quantity)).subtract(discountValue);
-        this.totalcost.setValue()= productPrice.multiply(new BigDecimal(quantity)).subtract(discountValue);
+        totalcost = new Money();
+        this.totalcost.setValue(productPrice.multiply(new BigDecimal(quantity)).subtract(discountValue));
     }
 
-    public String getProductId() {
-        return productId;
-    }
 
     public BigDecimal getProductPrice() {
         return productPrice;
     }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public Date getProductSnapshotDate() {
-        return productSnapshotDate;
-    }
-
-    public String getProductType() {
-        return productType;
-    }
-
 
     public String getTotalCostCurrency() {
         return currency;
@@ -107,7 +83,7 @@ public class OfferItem {
     @Override
     public int hashCode() {
         return Objects.hash(currency, discount, discountCause, productId, productName, productPrice, productSnapshotDate, productType,
-                quantity, totalCost);
+                quantity, totalcost.getValue());
     }
 
     @Override
@@ -131,7 +107,7 @@ public class OfferItem {
                && Objects.equals(productSnapshotDate, other.productSnapshotDate)
                && Objects.equals(productType, other.productType)
                && quantity == other.quantity
-               && Objects.equals(totalCost, other.totalCost);
+               && Objects.equals(totalcost.getValue(), other.totalCost.getValue());
     }
 
     /**

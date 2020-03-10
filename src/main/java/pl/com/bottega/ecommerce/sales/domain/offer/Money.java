@@ -10,7 +10,7 @@ public class Money {
     private BigDecimal value;
 
     public Money() {
-        this(null);
+        value = new BigDecimal(0);
     }
 
     public Money(BigDecimal value ) {
