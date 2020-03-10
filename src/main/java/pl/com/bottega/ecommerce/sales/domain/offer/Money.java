@@ -6,10 +6,10 @@ public class Money {
     private String currency;
     private BigDecimal value;
 
-    public Money()
+    public Money(String currency,BigDecimal value)
     {
-        this.value = new BigDecimal(0);
-        this.currency = new String();
+        this.value = value;
+        this.currency = currency;
     }
 
     public String getCurrency(){

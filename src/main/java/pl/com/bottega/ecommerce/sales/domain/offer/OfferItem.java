@@ -25,10 +25,10 @@ public class OfferItem {
 
 
     public OfferItem(String productId, String productName, Date productSnapshotDate, String productType,
-            int quantity, String cause) {
+            int quantity, String cause,String currency,BigDecimal value) {
 
         this.quantity = quantity;
-        totalCost = new Money();
+        totalCost = new Money(currency, value);
         product = new Product(productId,productName,productSnapshotDate,productType);
         discount = new Discount(cause);
     }
@@ -73,7 +73,10 @@ public class OfferItem {
         return currency;
     }*/
 
-
+    public String getTotalCostCurrency()
+    {
+        return totalCost.get
+    }
 
     public int getQuantity() {
         return quantity;
