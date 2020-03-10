@@ -38,12 +38,8 @@ public class OfferItem {
         this.quantity = quantity;
         this.discount = new Discount(discountCause, new Money(discount));
 
-        BigDecimal discountValue = new BigDecimal(0);
-        if (discount != null) {
-            discountValue = discountValue.add(discount);
-        }
-        this.totalCost = new Money(productPrice.multiply(new BigDecimal(quantity))
-                .subtract(discountValue));
+        this.totalCost = new Money(productPrice).multiply(quantity)
+                .subtract(this.discount);
     }
 
     public String getProductId() {
@@ -88,8 +84,7 @@ public class OfferItem {
 
     @Override
     public int hashCode() {
-        return Objects.hash(totalCost.getCurrency(), discount.getValue(), discount.getCause(), product.getId(), product.getName(),
-                product.getPrice(), product.getSnapshotDate(), product.getType(), quantity, totalCost);
+        return Objects.hash(totalCost.hashCode(), discount.hashCode(), product.hashCode(),  quantity);
     }
 
     @Override
@@ -104,16 +99,10 @@ public class OfferItem {
             return false;
         }
         OfferItem other = (OfferItem) obj;
-        return Objects.equals(totalCost.getCurrency(), other.totalCost.getCurrency())
+        return Objects.equals(totalCost, other.totalCost)
                && Objects.equals(discount, other.discount)
-               && Objects.equals(discount.getCause(), other.discount.getCause())
-               && Objects.equals(product.getId(), other.product.getId())
-               && Objects.equals(product.getName(), other.product.getName())
-               && Objects.equals(product.getPrice(), other.product.getPrice())
-               && Objects.equals(product.getSnapshotDate(), other.product.getSnapshotDate())
-               && Objects.equals(product.getType(), other.product.getType())
-               && quantity == other.quantity
-               && Objects.equals(totalCost.getValue(), other.totalCost.getValue());
+               && Objects.equals(product, other.product)
+               && quantity == other.quantity;
     }
 
     /**
