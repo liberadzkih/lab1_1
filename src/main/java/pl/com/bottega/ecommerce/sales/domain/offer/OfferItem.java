@@ -58,7 +58,7 @@ public class OfferItem {
     }
 
     public BigDecimal getTotalCost() {
-        return totalCost.getValue();
+        return totalCost.getAmount();
     }
 
     public String getTotalCostCurrency() {
@@ -135,12 +135,12 @@ public class OfferItem {
 
         BigDecimal max;
         BigDecimal min;
-        if (totalCost.getValue().compareTo(other.totalCost.getValue()) > 0) {
-            max = totalCost.getValue();
-            min = other.totalCost.getValue();
+        if (totalCost.getAmount().compareTo(other.totalCost.getAmount()) > 0) {
+            max = totalCost.getAmount();
+            min = other.totalCost.getAmount();
         } else {
-            max = other.totalCost.getValue();
-            min = totalCost.getValue();
+            max = other.totalCost.getAmount();
+            min = totalCost.getAmount();
         }
 
         BigDecimal difference = max.subtract(min);

@@ -4,16 +4,16 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Money {
-    private BigDecimal value;
+    private BigDecimal amount;
     private String currency;
 
-    public Money(BigDecimal value, String currency) {
-        this.value = value;
+    public Money(BigDecimal amount, String currency) {
+        this.amount = amount;
         this.currency = currency;
     }
 
-    public BigDecimal getValue() {
-        return value;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
     public String getCurrency() {
@@ -21,12 +21,12 @@ public class Money {
     }
 
     public Money multiply(int multiplier) {
-        this.value = value.multiply(new BigDecimal(multiplier));
+        this.amount = amount.multiply(new BigDecimal(multiplier));
         return this;
     }
 
     public Money subtract(BigDecimal subtrahend) {
-        this.value = value.subtract(subtrahend);
+        this.amount = amount.subtract(subtrahend);
         return this;
     }
 
@@ -37,11 +37,11 @@ public class Money {
         if (obj == null || getClass() != obj.getClass())
             return false;
         Money money = (Money) obj;
-        return Objects.equals(value, money.value) && Objects.equals(currency, money.currency);
+        return Objects.equals(amount, money.amount) && Objects.equals(currency, money.currency);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, currency);
+        return Objects.hash(amount, currency);
     }
 }

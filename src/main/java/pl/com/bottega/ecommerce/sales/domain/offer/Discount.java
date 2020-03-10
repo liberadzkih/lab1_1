@@ -16,7 +16,7 @@ public class Discount {
     }
 
     public BigDecimal getValue() {
-        return value.getValue();
+        return value.getAmount();
     }
 
     public String getCause() {
