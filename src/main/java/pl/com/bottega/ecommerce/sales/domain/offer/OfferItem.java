@@ -13,49 +13,26 @@
 package pl.com.bottega.ecommerce.sales.domain.offer;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.Objects;
 
 public class OfferItem {
 
-    // product
-    private String productId;
-
-    private BigDecimal productPrice;
-
-    private String productName;
-
-    private Date productSnapshotDate;
-
-    private String productType;
+    private Product product;
 
     private int quantity;
 
-    private BigDecimal totalCost;
+    private Money totalCost;
 
-    private String currency;
+    private Discount discount;
 
-    // discount
-    private String discountCause;
-
-    private BigDecimal discount;
-
-    public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate, String productType,
-            int quantity) {
-        this(productId, productPrice, productName, productSnapshotDate, productType, quantity, null, null);
+    public OfferItem(Product product, int quantity, Money totalCost) {
+        this(product, quantity, totalCost,null);
     }
 
-    public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate, String productType,
-            int quantity, BigDecimal discount, String discountCause) {
-        this.productId = productId;
-        this.productPrice = productPrice;
-        this.productName = productName;
-        this.productSnapshotDate = productSnapshotDate;
-        this.productType = productType;
-
-        this.quantity = quantity;
+    public OfferItem(Product product, int quantity, Money totalCost, Discount discount) {
+        this.product = product;
         this.discount = discount;
-        this.discountCause = discountCause;
+        this.quantity = quantity;
 
         BigDecimal discountValue = new BigDecimal(0);
         if (discount != null) {
@@ -66,40 +43,32 @@ public class OfferItem {
                                      .subtract(discountValue);
     }
 
-    public String getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public BigDecimal getProductPrice() {
-        return productPrice;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public String getProductName() {
-        return productName;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public Date getProductSnapshotDate() {
-        return productSnapshotDate;
-    }
-
-    public String getProductType() {
-        return productType;
-    }
-
-    public BigDecimal getTotalCost() {
+    public Money getTotalCost() {
         return totalCost;
     }
 
-    public String getTotalCostCurrency() {
-        return currency;
+    public void setTotalCost(Money totalCost) {
+        this.totalCost = totalCost;
     }
 
-    public BigDecimal getDiscount() {
+    public Discount getDiscount() {
         return discount;
     }
 
-    public String getDiscountCause() {
-        return discountCause;
+    public void setDiscount(Discount discount) {
+        this.discount = discount;
     }
 
     public int getQuantity() {
