@@ -31,9 +31,9 @@ public class OfferItem {
 
     private int quantity;
 
-    private BigDecimal totalCost;
+    private Money totalCost;
 
-    private String currency;
+    //private String currency;
 
     // discount
     private String discountCause;
@@ -62,8 +62,10 @@ public class OfferItem {
             discountValue = discountValue.add(discount);
         }
 
-        this.totalCost = productPrice.multiply(new BigDecimal(quantity))
-                                     .subtract(discountValue);
+        /*this.totalCost = productPrice.multiply(new BigDecimal(quantity))
+                                     .subtract(discountValue);*/
+
+        //this.totalCost.getValue()
     }
 
     public String getProductId() {
@@ -86,13 +88,13 @@ public class OfferItem {
         return productType;
     }
 
-    public BigDecimal getTotalCost() {
+    /*public BigDecimal getTotalCost() {
         return totalCost;
     }
 
     public String getTotalCostCurrency() {
         return currency;
-    }
+    }*/
 
     public BigDecimal getDiscount() {
         return discount;
