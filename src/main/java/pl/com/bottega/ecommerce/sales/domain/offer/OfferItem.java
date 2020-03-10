@@ -36,7 +36,7 @@ public class OfferItem {
     private String currency;
 
     // discount
-    Discount theDiscount;
+    private Discount theDiscount;
 
     public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate, String productType,
             int quantity) {
