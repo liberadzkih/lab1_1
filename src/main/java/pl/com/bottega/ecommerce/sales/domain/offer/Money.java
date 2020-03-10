@@ -5,45 +5,54 @@ import java.util.Objects;
 
 public class Money {
     private String currency;
-    private BigDecimal value;
+    private BigDecimal amount;
 
-    public Money(BigDecimal value) {
-        this.value = value;
+    public Money(BigDecimal amount) {
+        this.amount = amount;
         this.currency = null;
     }
 
-    public Money(String currency, BigDecimal value) {
+    public Money(String currency, BigDecimal amount) {
         this.currency = currency;
-        this.value = value;
+        this.amount = amount;
+    }
+
+    public Money substract(Money subtrahend){
+        return new Money(amount.subtract(subtrahend.getAmount()));
+    }
+    public Money multiply(int multiplicand){
+        return new Money(amount.multiply(new BigDecimal(multiplicand)));
     }
 
     public String getCurrency() {
         return currency;
     }
 
-    public BigDecimal getValue() {
-        return value;
-    }
-
     public void setCurrency(String currency) {
         this.currency = currency;
     }
 
-    public void setValue(BigDecimal value) {
-        this.value = value;
+    public BigDecimal getAmount() {
+        return amount;
     }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Money money = (Money) o;
         return Objects.equals(getCurrency(), money.getCurrency()) &&
-                Objects.equals(getValue(), money.getValue());
+                Objects.equals(getAmount(), money.getAmount());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCurrency(), getValue());
+        return Objects.hash(getCurrency(), getAmount());
     }
+
 
 }

@@ -19,6 +19,7 @@ import java.util.Objects;
 public class OfferItem {
 
     private Discount discount;
+
     private Product product;
 
     private int quantity;
@@ -38,13 +39,7 @@ public class OfferItem {
         this.quantity = quantity;
         this.discount = new Discount(discountCause,new Money(discount));
 
-        BigDecimal discountValue = new BigDecimal(0);
-        if (discount != null) {
-            discountValue = discountValue.add(discount);
-        }
-
-        this.totalCost = new Money(productPrice.multiply(new BigDecimal(quantity))
-                .subtract(discountValue));
+        this.totalCost = this.product.getPrice().multiply(quantity).substract(this.discount.getValue());
     }
 
     public String getProductId() {
@@ -52,7 +47,7 @@ public class OfferItem {
     }
 
     public BigDecimal getProductPrice() {
-        return product.getPrice().getValue();
+        return product.getPrice().getAmount();
     }
 
     public String getProductName() {
@@ -67,14 +62,14 @@ public class OfferItem {
         return product.getType();
     }
 
-    public BigDecimal getTotalCost() { return totalCost.getValue(); }
+    public BigDecimal getTotalCost() { return totalCost.getAmount(); }
 
     public String getTotalCostCurrency() {
         return totalCost.getCurrency();
     }
 
     public BigDecimal getDiscount() {
-        return discount.getValue().getValue();
+        return discount.getValue().getAmount();
     }
 
     public String getDiscountCause() {
@@ -87,9 +82,7 @@ public class OfferItem {
 
     @Override
     public int hashCode() {
-        return Objects.hash(totalCost.getCurrency(), discount.getValue().getValue(), discount.getCause(), product.getId(), product.getName(),
-                product.getPrice().getValue(), product.getSnapshotDate(), product.getType(),
-                quantity, totalCost.getValue());
+        return Objects.hash(totalCost.hashCode(),discount.hashCode(),product.hashCode(),quantity);
     }
 
     @Override
@@ -104,10 +97,10 @@ public class OfferItem {
             return false;
         }
         OfferItem other = (OfferItem) obj;
-        return  Objects.equals(discount,other.discount)
-                && Objects.equals(product,other.product)
+        return  discount.equals(other.discount)
+                && product.equals(other.product)
                 && quantity == other.quantity
-                && Objects.equals(totalCost, other.totalCost);
+                && totalCost.equals(other.totalCost);
     }
 
     /**
@@ -120,11 +113,11 @@ public class OfferItem {
      *            true if objects differ within acceptable difference
      */
     public boolean sameAs(OfferItem other, double delta) {
-        if (product.getPrice().getValue() == null) {
-            if (other.product.getPrice().getValue() != null) {
+        if (product.getPrice().getAmount() == null) {
+            if (other.product.getPrice().getAmount() != null) {
                 return false;
             }
-        } else if (!product.getPrice().getValue().equals(other.product.getPrice().getValue())) {
+        } else if (!product.getPrice().getAmount().equals(other.product.getPrice().getAmount())) {
             return false;
         }
         if (product.getName() == null) {
@@ -156,12 +149,12 @@ public class OfferItem {
 
         BigDecimal max;
         BigDecimal min;
-        if (totalCost.getValue().compareTo(other.totalCost.getValue()) > 0) {
-            max = totalCost.getValue();
-            min = other.totalCost.getValue();
+        if (totalCost.getAmount().compareTo(other.totalCost.getAmount()) > 0) {
+            max = totalCost.getAmount();
+            min = other.totalCost.getAmount();
         } else {
-            max = other.totalCost.getValue();
-            min = totalCost.getValue();
+            max = other.totalCost.getAmount();
+            min = totalCost.getAmount();
         }
 
         BigDecimal difference = max.subtract(min);
