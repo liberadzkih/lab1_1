@@ -18,7 +18,7 @@ import java.util.Objects;
 
 public class OfferItem {
 
-    // product
+    // product wyciągnąć jako klase kontener dla zmiennych
     private String productId;
 
     private BigDecimal productPrice;
@@ -31,9 +31,8 @@ public class OfferItem {
 
     private int quantity;
 
-    private BigDecimal totalCost;
+    private Money totalCost;
 
-    private String currency;
 
     // discount
     private String discountCause;
@@ -62,8 +61,8 @@ public class OfferItem {
             discountValue = discountValue.add(discount);
         }
 
-        this.totalCost = productPrice.multiply(new BigDecimal(quantity))
-                                     .subtract(discountValue);
+        this.totalCost = new Money(productPrice.multiply(new BigDecimal(quantity))
+                .subtract(discountValue));
     }
 
     public String getProductId() {
@@ -86,12 +85,10 @@ public class OfferItem {
         return productType;
     }
 
-    public BigDecimal getTotalCost() {
-        return totalCost;
-    }
+    public BigDecimal getTotalCost() { return totalCost.getValue(); }
 
     public String getTotalCostCurrency() {
-        return currency;
+        return totalCost.getCurrency();
     }
 
     public BigDecimal getDiscount() {
@@ -108,8 +105,8 @@ public class OfferItem {
 
     @Override
     public int hashCode() {
-        return Objects.hash(currency, discount, discountCause, productId, productName, productPrice, productSnapshotDate, productType,
-                quantity, totalCost);
+        return Objects.hash(totalCost.getCurrency(), discount, discountCause, productId, productName, productPrice, productSnapshotDate, productType,
+                quantity, totalCost.getValue());
     }
 
     @Override
@@ -124,8 +121,7 @@ public class OfferItem {
             return false;
         }
         OfferItem other = (OfferItem) obj;
-        return Objects.equals(currency, other.currency)
-               && Objects.equals(discount, other.discount)
+        return  Objects.equals(discount, other.discount)
                && Objects.equals(discountCause, other.discountCause)
                && Objects.equals(productId, other.productId)
                && Objects.equals(productName, other.productName)
@@ -138,10 +134,12 @@ public class OfferItem {
 
     /**
      *
-     * @param item
+     * @param other
+     *            object to be compared
      * @param delta
      *            acceptable percentage difference
      * @return
+     *            true if objects differ within acceptable difference
      */
     public boolean sameAs(OfferItem other, double delta) {
         if (productPrice == null) {
@@ -177,15 +175,15 @@ public class OfferItem {
         if (quantity != other.quantity) {
             return false;
         }
-
+        //usuniecie i zmiana na moduł
         BigDecimal max;
         BigDecimal min;
-        if (totalCost.compareTo(other.totalCost) > 0) {
-            max = totalCost;
-            min = other.totalCost;
+        if (totalCost.getValue().compareTo(other.totalCost.getValue()) > 0) {
+            max = totalCost.getValue();
+            min = other.totalCost.getValue();
         } else {
-            max = other.totalCost;
-            min = totalCost;
+            max = other.totalCost.getValue();
+            min = totalCost.getValue();
         }
 
         BigDecimal difference = max.subtract(min);
