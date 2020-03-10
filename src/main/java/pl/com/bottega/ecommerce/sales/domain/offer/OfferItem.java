@@ -18,22 +18,37 @@ import java.util.Objects;
 
 public class OfferItem {
 
-
     private int quantity;
     private Money totalCost;
+    private Product product;
+    private Discount discount;
 
 
-    public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate, String productType,
-            int quantity) {
-        this(productId, productPrice, productName, productSnapshotDate, productType, quantity, null, null);
+    public OfferItem(String productId, String productName, Date productSnapshotDate, String productType,
+            int quantity, String cause) {
+
+        this.quantity = quantity;
+        totalCost = new Money();
+        product = new Product(productId,productName,productSnapshotDate,productType);
+        discount = new Discount(cause);
     }
 
-    public OfferItem(
+   /* public OfferItem(int quantity, Money money, Product product, Discount discount)
+    {
+        this.quantity=quantity;
+        this.totalCost = money;
+        this.product=product;
+        this.discount=discount;
+    }*/
+
+    /*public OfferItem(
             int quantity, BigDecimal discount, String discountCause) {
 
 
         this.quantity = quantity;
-        this.discount = discount;
+        totalCost = new Money();
+        product = new Product();
+        discount = new Discount();
 
 
         BigDecimal discountValue = new BigDecimal(0);
@@ -41,13 +56,13 @@ public class OfferItem {
             discountValue = discountValue.add(discount);
         }
 
-        totalCost = new Money();
+
 
         this.totalCost.setValue(productPrice.multiply(new BigDecimal(quantity))
                       .subtract(discountValue));
 
         //this.totalCost.getValue()
-    }
+    }*/
 
 
     /*public BigDecimal getTotalCost() {
@@ -58,13 +73,7 @@ public class OfferItem {
         return currency;
     }*/
 
-    public BigDecimal getDiscount() {
-        return discount;
-    }
 
-    public String getDiscountCause() {
-        return discountCause;
-    }
 
     public int getQuantity() {
         return quantity;

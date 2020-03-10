@@ -9,6 +9,7 @@ public class Money {
     public Money()
     {
         this.value = new BigDecimal(0);
+        this.currency = new String();
     }
 
     public String getCurrency(){

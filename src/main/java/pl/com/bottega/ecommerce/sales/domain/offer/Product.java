@@ -9,6 +9,7 @@ public class Product {
     private String productName;
     private Date productSnapshotDate;
     private String productType;
+    private Money money;
 
     public Product(String productId, String productName, Date productSnapshotDate, String productType)
     {
@@ -16,6 +17,7 @@ public class Product {
         this.productName = productName;
         this.productSnapshotDate = productSnapshotDate;
         this.productType = productType;
+
     }
 
     public String getProductId() {
@@ -34,4 +36,11 @@ public class Product {
         return productType;
     }
 
+    public Money getMoney() {
+        return money;
+    }
+
+    public void setMoney(Money money) {
+        this.money = money;
+    }
 }
