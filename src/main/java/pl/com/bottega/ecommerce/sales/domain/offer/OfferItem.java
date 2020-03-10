@@ -47,6 +47,10 @@ public class OfferItem {
         this.totalCost = new Money(productPrice.multiply(new BigDecimal(quantity)).subtract(discountValue), currency);
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(totalCost.getCurrency(), discount, discount.getCause(), product.getId(), product.getName(), product.getPrice(), product.getSnapshotDate(), product.getType(),
