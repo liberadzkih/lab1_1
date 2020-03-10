@@ -26,7 +26,7 @@ public class OfferItem {
     private Discount discount;
 
     public OfferItem(Product product, int quantity, Money totalCost) {
-        this(product, quantity, totalCost,null);
+        this(product, quantity, totalCost, null);
     }
 
     public OfferItem(Product product, int quantity, Money totalCost, Discount discount) {
@@ -70,13 +70,11 @@ public class OfferItem {
         return quantity;
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return Objects.hash(discount, product, quantity, totalCost);
     }
 
-    @Override
-    public boolean equals(Object obj) {
+    @Override public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
@@ -94,10 +92,8 @@ public class OfferItem {
     }
 
     /**
-     *
      * @param other
-     * @param delta
-     *            acceptable percentage difference
+     * @param delta acceptable percentage difference
      * @return
      */
     public boolean sameAs(OfferItem other, double delta) {
