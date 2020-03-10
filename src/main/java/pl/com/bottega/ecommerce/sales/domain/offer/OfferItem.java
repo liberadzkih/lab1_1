@@ -78,33 +78,19 @@ public class OfferItem {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(getTotalCostCurrency(), getDiscount(), getDiscountCause(), getProductId(), getProductName(), getProductPrice(),
-                getProductSnapshotDate(), getProductType(), quantity, getTotalCost());
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        OfferItem offerItem = (OfferItem) obj;
+        return quantity == offerItem.quantity && Objects.equals(product, offerItem.product) && Objects.equals(totalCost,
+                offerItem.totalCost) && Objects.equals(discount, offerItem.discount);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        OfferItem other = (OfferItem) obj;
-        return Objects.equals(getTotalCostCurrency(), other.getTotalCostCurrency())
-               && Objects.equals(getDiscount(), other.getDiscount())
-               && Objects.equals(getDiscountCause(), other.getDiscountCause())
-               && Objects.equals(getProductId(), other.getProductId())
-               && Objects.equals(getProductName(), other.getProductName())
-               && Objects.equals(getProductPrice(), other.getProductPrice())
-               && Objects.equals(getProductSnapshotDate(), other.getProductSnapshotDate())
-               && Objects.equals(getProductType(), other.getProductType())
-               && quantity == other.quantity
-               && Objects.equals(totalCost.getValue(), other.totalCost.getValue());
+    public int hashCode() {
+        return Objects.hash(product, quantity, totalCost, discount);
     }
 
     /**
