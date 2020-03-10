@@ -18,19 +18,7 @@ import java.util.Objects;
 
 public class OfferItem {
 
-    // product
-
-    private BigDecimal productPrice;
-
     private int quantity;
-
-    private String currency;
-
-    // discount
-    private String discountCause;
-
-    private BigDecimal discount;
-
     private Money totalcost;
 
     public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate, String productType,
