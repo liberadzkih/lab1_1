@@ -18,4 +18,14 @@ public class Money {
     public String getCurrency() {
         return currency;
     }
+
+    public Money multiply(int multiplier) {
+        this.value = value.multiply(new BigDecimal(multiplier));
+        return this;
+    }
+
+    public Money subtract(BigDecimal subtrahend) {
+        this.value = value.subtract(subtrahend);
+        return this;
+    }
 }

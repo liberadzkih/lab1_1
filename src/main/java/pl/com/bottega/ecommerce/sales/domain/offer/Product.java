@@ -27,6 +27,8 @@ public class Product {
         return id;
     }
 
+    public Money getPrice() { return price; }
+
     public BigDecimal getPriceValue() {
         return price.getValue();
     }
