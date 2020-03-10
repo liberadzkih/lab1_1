@@ -28,4 +28,8 @@ public class Money {
     public void setCurrency(String currency) {
         this.currency = currency;
     }
+
+    public BigDecimal multiply(BigDecimal value) {
+        return this.getValue().multiply(value);
+    }
 }

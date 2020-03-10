@@ -35,12 +35,7 @@ public class OfferItem {
         this.quantity = quantity;
         this.totalCost = totalCost;
 
-        BigDecimal discountValue = new BigDecimal(0);
-        if (discount != null) {
-            discount.getValue().setValue(discountValue);
-        }
-
-        this.totalCost.setValue(product.getPrice().getValue().multiply(new BigDecimal(quantity)).subtract(discountValue));
+        this.totalCost.setValue(product.getPrice().multiply(new BigDecimal(quantity)).subtract(discount.getValue().getValue()));
     }
 
     public Product getProduct() {
@@ -106,48 +101,25 @@ public class OfferItem {
      * @return
      */
     public boolean sameAs(OfferItem other, double delta) {
-        if (productPrice == null) {
-            if (other.productPrice != null) {
+        if (product == null) {
+            if (other.product != null) {
                 return false;
             }
-        } else if (!productPrice.equals(other.productPrice)) {
+        } else if (!product.equals(other.product)) {
             return false;
         }
-        if (productName == null) {
-            if (other.productName != null) {
-                return false;
-            }
-        } else if (!productName.equals(other.productName)) {
-            return false;
-        }
-
-        if (productId == null) {
-            if (other.productId != null) {
-                return false;
-            }
-        } else if (!productId.equals(other.productId)) {
-            return false;
-        }
-        if (productType == null) {
-            if (other.productType != null) {
-                return false;
-            }
-        } else if (!productType.equals(other.productType)) {
-            return false;
-        }
-
         if (quantity != other.quantity) {
             return false;
         }
 
         BigDecimal max;
         BigDecimal min;
-        if (totalCost.compareTo(other.totalCost) > 0) {
-            max = totalCost;
-            min = other.totalCost;
+        if (totalCost.getValue().compareTo(other.totalCost.getValue()) > 0) {
+            max = totalCost.getValue();
+            min = other.totalCost.getValue();
         } else {
-            max = other.totalCost;
-            min = totalCost;
+            max = other.totalCost.getValue();
+            min = totalCost.getValue();
         }
 
         BigDecimal difference = max.subtract(min);
