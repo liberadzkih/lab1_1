@@ -24,10 +24,8 @@ public class OfferItem {
 
     private Money totalCost;
 
-    // discount
-    private String discountCause;
+    private Discount discount;
 
-    private BigDecimal discount;
 
     public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate, String productType,
             int quantity) {
@@ -38,8 +36,7 @@ public class OfferItem {
             int quantity, BigDecimal discount, String discountCause) {
         product = new Product(productId,productType,productSnapshotDate,productName,productPrice);
         this.quantity = quantity;
-        this.discount = discount;
-        this.discountCause = discountCause;
+        this.discount = new Discount(discountCause, new Money(discount));
 
         BigDecimal discountValue = new BigDecimal(0);
         if (discount != null) {
@@ -78,11 +75,11 @@ public class OfferItem {
     }
 
     public BigDecimal getDiscount() {
-        return discount;
+        return discount.getValue();
     }
 
     public String getDiscountCause() {
-        return discountCause;
+        return discount.getCause();
     }
 
     public int getQuantity() {
@@ -91,7 +88,7 @@ public class OfferItem {
 
     @Override
     public int hashCode() {
-        return Objects.hash(totalCost.getCurrency(), discount, discountCause, product.getId(), product.getName(),
+        return Objects.hash(totalCost.getCurrency(), discount.getValue(), discount.getCause(), product.getId(), product.getName(),
                 product.getPrice(), product.getSnapshotDate(), product.getType(), quantity, totalCost);
     }
 
@@ -109,7 +106,7 @@ public class OfferItem {
         OfferItem other = (OfferItem) obj;
         return Objects.equals(totalCost.getCurrency(), other.totalCost.getCurrency())
                && Objects.equals(discount, other.discount)
-               && Objects.equals(discountCause, other.discountCause)
+               && Objects.equals(discount.getCause(), other.discount.getCause())
                && Objects.equals(product.getId(), other.product.getId())
                && Objects.equals(product.getName(), other.product.getName())
                && Objects.equals(product.getPrice(), other.product.getPrice())
