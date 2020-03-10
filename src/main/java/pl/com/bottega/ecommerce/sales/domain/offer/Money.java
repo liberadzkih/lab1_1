@@ -17,6 +17,7 @@ public class Money {
         value = new BigDecimal(0);
     }
 
+
     public String getCurrency() {
         return currency;
     }
