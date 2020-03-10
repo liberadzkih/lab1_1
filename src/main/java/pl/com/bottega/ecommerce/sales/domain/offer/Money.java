@@ -32,4 +32,12 @@ public class Money {
     public BigDecimal multiply(BigDecimal value) {
         return this.getValue().multiply(value);
     }
+
+    @Override public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }

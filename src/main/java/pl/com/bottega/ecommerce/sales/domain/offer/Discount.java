@@ -26,4 +26,12 @@ public class Discount {
     public void setValue(Money value) {
         this.value = value;
     }
+
+    @Override public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }
