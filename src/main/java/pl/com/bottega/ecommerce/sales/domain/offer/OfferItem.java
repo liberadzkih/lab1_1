@@ -36,9 +36,7 @@ public class OfferItem {
     private String currency;
 
     // discount
-    private String discountCause;
-
-    private BigDecimal discount;
+    Discount theDiscount;
 
     public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate, String productType,
             int quantity) {
@@ -54,12 +52,12 @@ public class OfferItem {
         this.productType = productType;
 
         this.quantity = quantity;
-        this.discount = discount;
-        this.discountCause = discountCause;
+
+        this.theDiscount = new Discount(discountCause,discount);
 
         BigDecimal discountValue = new BigDecimal(0);
         if (discount != null) {
-            discountValue = discountValue.add(discount);
+            discountValue = discountValue.add(theDiscount.getDiscount());
         }
 
         this.totalCost = productPrice.multiply(new BigDecimal(quantity))
@@ -95,11 +93,11 @@ public class OfferItem {
     }
 
     public BigDecimal getDiscount() {
-        return discount;
+        return theDiscount.getDiscount();
     }
 
     public String getDiscountCause() {
-        return discountCause;
+        return theDiscount.getDiscountCause();
     }
 
     public int getQuantity() {
@@ -108,7 +106,7 @@ public class OfferItem {
 
     @Override
     public int hashCode() {
-        return Objects.hash(currency, discount, discountCause, productId, productName, productPrice, productSnapshotDate, productType,
+        return Objects.hash(currency, theDiscount.getDiscount(), theDiscount.getDiscountCause(), productId, productName, productPrice, productSnapshotDate, productType,
                 quantity, totalCost);
     }
 
@@ -125,8 +123,8 @@ public class OfferItem {
         }
         OfferItem other = (OfferItem) obj;
         return Objects.equals(currency, other.currency)
-               && Objects.equals(discount, other.discount)
-               && Objects.equals(discountCause, other.discountCause)
+               && Objects.equals(theDiscount.getDiscount(), other.theDiscount.getDiscount())
+               && Objects.equals(theDiscount.getDiscountCause(), other.theDiscount.getDiscountCause())
                && Objects.equals(productId, other.productId)
                && Objects.equals(productName, other.productName)
                && Objects.equals(productPrice, other.productPrice)
