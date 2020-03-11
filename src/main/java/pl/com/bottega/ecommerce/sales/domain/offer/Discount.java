@@ -14,7 +14,7 @@ public class Discount {
         this.value = value;
     }
 
-    public Money getDiscount() {
+    public Money getValue() {
         return value;
     }
 
