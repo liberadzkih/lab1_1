@@ -7,15 +7,15 @@ public class Discount {
 
     private String discountCause;
 
-    private Money discount;
+    private Money value;
 
-    public Discount(String discountCause, Money discount) {
+    public Discount(String discountCause, Money value) {
         this.discountCause = discountCause;
-        this.discount = discount;
+        this.value = value;
     }
 
     public Money getDiscount() {
-        return discount;
+        return value;
     }
 
     public String getDiscountCause() {
@@ -32,11 +32,11 @@ public class Discount {
         }
         Discount discount1 = (Discount) o;
         return Objects.equals(discountCause, discount1.discountCause) &&
-                Objects.equals(discount, discount1.discount);
+                Objects.equals(value, discount1.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(discountCause, discount);
+        return Objects.hash(discountCause, value);
     }
 }
