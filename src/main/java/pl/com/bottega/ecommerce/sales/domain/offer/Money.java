@@ -25,6 +25,16 @@ public class Money {
         return currency;
     }
 
+    public Money multiply(BigDecimal multiplier) {
+        this.value = this.value.multiply(multiplier);
+        return this;
+    }
+
+    public Money subtract(BigDecimal subtrahend) {
+        this.value = this.value.subtract(subtrahend);
+        return this;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
