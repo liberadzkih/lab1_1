@@ -1,5 +1,7 @@
 package pl.com.bottega.ecommerce.sales.domain.offer;
 
+import java.util.Objects;
+
 public class Discount {
 
     private String discountCause;
@@ -22,11 +24,7 @@ public class Discount {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((discount == null) ? 0 : discount.hashCode());
-        result = prime * result + ((discountCause == null) ? 0 : discountCause.hashCode());
-        return result;
+        return Objects.hash(discount, discountCause);
     }
 
     @Override
