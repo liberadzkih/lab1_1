@@ -45,7 +45,7 @@ public class OfferItem {
         this.theDiscount = new Discount(discountCause,discount);
 
         BigDecimal discountValue = new BigDecimal(0);
-        if (discount != null) {
+        if (this.theDiscount.getDiscount() != null) {
             discountValue = discountValue.add(theDiscount.getDiscount());
         }
 
