@@ -22,6 +22,10 @@ public class Money {
         return value;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
