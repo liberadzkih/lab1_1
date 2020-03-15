@@ -1,18 +1,17 @@
 package pl.com.bottega.ecommerce.sales.domain.offer;
 
-import java.math.BigDecimal;
-
 public class Discount {
-    private Money discountValue;
+
+    private Money value;
     private String cause;
 
-    Discount(Money discountValue, String cause) {
-        this.discountValue = discountValue;
+    Discount(Money value, String cause) {
+        this.value = value;
         this.cause = cause;
     }
 
-    public Money getDiscountValue() {
-        return discountValue;
+    public Money getValue() {
+        return value;
     }
 
     public String getCause() {
