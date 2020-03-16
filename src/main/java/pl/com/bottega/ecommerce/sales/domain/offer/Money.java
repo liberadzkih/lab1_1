@@ -1,6 +1,7 @@
 package pl.com.bottega.ecommerce.sales.domain.offer;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Money {
     private String currency;
@@ -18,5 +19,8 @@ public class Money {
     public BigDecimal getValue() {
         return value;
     }
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(currency,value);
+    }
 }

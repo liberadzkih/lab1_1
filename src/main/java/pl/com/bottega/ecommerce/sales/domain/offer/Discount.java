@@ -1,6 +1,7 @@
 package pl.com.bottega.ecommerce.sales.domain.offer;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Discount {
     private String cause;
@@ -17,5 +18,10 @@ public class Discount {
 
     public String getCause() {
         return cause;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cause,value);
     }
 }
