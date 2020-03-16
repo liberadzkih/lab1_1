@@ -9,10 +9,12 @@ public class Money {
     private String currency;
     private BigDecimal value;
 
+
     public Money(BigDecimal value) {
         value = new BigDecimal(0);
         this.currency = new String();
     }
+
     public Money() {
         value = new BigDecimal(0);
     }

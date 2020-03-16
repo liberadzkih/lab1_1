@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Product {
+
     private String productId;
     private String productName;
     private Date productSnapshotDate;
     private String productType;
-
     private Money price;
 
     public Product(String productId, String productName, Date productSnapshotDate, String productType) {
@@ -20,6 +20,10 @@ public class Product {
     }
     public String getProductId() {
         return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public String getProductName() {
@@ -41,5 +45,7 @@ public class Product {
     public void setPrice(Money price) {
         this.price = price;
     }
+
+
 
 }
