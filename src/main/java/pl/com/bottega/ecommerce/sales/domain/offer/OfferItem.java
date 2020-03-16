@@ -18,64 +18,88 @@ import java.util.Objects;
 
 public class OfferItem {
 
+    // product
+    private String productId;
+
+    private BigDecimal productPrice;
+
+    private String productName;
+
+    private Date productSnapshotDate;
+
+    private String productType;
+
     private int quantity;
-    private Money totalCost;
-    private Product product;
-    private Discount discount;
 
+    private BigDecimal totalCost;
 
-    public OfferItem(String productId, String productName, Date productSnapshotDate, String productType,
-            int quantity, String cause,String currency,BigDecimal value) {
+    private String currency;
 
-        this.quantity = quantity;
-        totalCost = new Money(currency, value);
-        product = new Product(productId,productName,productSnapshotDate,productType);
-        discount = new Discount(cause);
+    // discount
+    private String discountCause;
+
+    private BigDecimal discount;
+
+    public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate, String productType,
+            int quantity) {
+        this(productId, productPrice, productName, productSnapshotDate, productType, quantity, null, null);
     }
 
-   /* public OfferItem(int quantity, Money money, Product product, Discount discount)
-    {
-        this.quantity=quantity;
-        this.totalCost = money;
-        this.product=product;
-        this.discount=discount;
-    }*/
-
-    /*public OfferItem(
+    public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate, String productType,
             int quantity, BigDecimal discount, String discountCause) {
-
+        this.productId = productId;
+        this.productPrice = productPrice;
+        this.productName = productName;
+        this.productSnapshotDate = productSnapshotDate;
+        this.productType = productType;
 
         this.quantity = quantity;
-        totalCost = new Money();
-        product = new Product();
-        discount = new Discount();
-
+        this.discount = discount;
+        this.discountCause = discountCause;
 
         BigDecimal discountValue = new BigDecimal(0);
         if (discount != null) {
             discountValue = discountValue.add(discount);
         }
 
+        this.totalCost = productPrice.multiply(new BigDecimal(quantity))
+                                     .subtract(discountValue);
+    }
 
+    public String getProductId() {
+        return productId;
+    }
 
-        this.totalCost.setValue(productPrice.multiply(new BigDecimal(quantity))
-                      .subtract(discountValue));
+    public BigDecimal getProductPrice() {
+        return productPrice;
+    }
 
-        //this.totalCost.getValue()
-    }*/
+    public String getProductName() {
+        return productName;
+    }
 
+    public Date getProductSnapshotDate() {
+        return productSnapshotDate;
+    }
 
-    /*public BigDecimal getTotalCost() {
+    public String getProductType() {
+        return productType;
+    }
+
+    public BigDecimal getTotalCost() {
         return totalCost;
     }
 
     public String getTotalCostCurrency() {
         return currency;
-    }*/
+    }
 
-    public String getTotalCostCurrency()
-    {
-        return totalCost.get
+    public BigDecimal getDiscount() {
+        return discount;
+    }
+
+    public String getDiscountCause() {
+        return discountCause;
     }
 
     public int getQuantity() {
@@ -85,7 +109,7 @@ public class OfferItem {
     @Override
     public int hashCode() {
         return Objects.hash(currency, discount, discountCause, productId, productName, productPrice, productSnapshotDate, productType,
-                quantity, totalCost.getValue());
+                quantity, totalCost);
     }
 
     @Override
