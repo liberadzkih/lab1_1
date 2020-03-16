@@ -93,33 +93,33 @@ public class OfferItem {
      * @return
      */
     public boolean sameAs(OfferItem other, double delta) {
-        if (productPrice == null) {
-            if (other.productPrice != null) {
+        if (product.getProductPrice() == null) {
+            if (other.product.getProductPrice() != null) {
                 return false;
             }
-        } else if (!productPrice.equals(other.productPrice)) {
+        } else if (!product.getProductPrice().equals(other.product.getProductPrice())) {
             return false;
         }
-        if (productName == null) {
-            if (other.productName != null) {
+        if (product.getProductName() == null) {
+            if (other.product.getProductName() != null) {
                 return false;
             }
-        } else if (!productName.equals(other.productName)) {
+        } else if (!product.getProductName().equals(other.product.getProductName())) {
             return false;
         }
 
-        if (productId == null) {
-            if (other.productId != null) {
+        if (product.getProductId() == null) {
+            if (other.product.getProductId() != null) {
                 return false;
             }
-        } else if (!productId.equals(other.productId)) {
+        } else if (!product.getProductId().equals(other.product.getProductId())) {
             return false;
         }
-        if (productType == null) {
-            if (other.productType != null) {
+        if (product.getProductType() == null) {
+            if (other.product.getProductType() != null) {
                 return false;
             }
-        } else if (!productType.equals(other.productType)) {
+        } else if (!product.getProductType().equals(other.product.getProductType())) {
             return false;
         }
 
