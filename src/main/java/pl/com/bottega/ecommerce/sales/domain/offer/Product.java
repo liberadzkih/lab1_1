@@ -44,4 +44,22 @@ public class Product {
         return Objects.hash(id, name, snapshotDate, type, price);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Product other = (Product) obj;
+        return Objects.equals(id, other.getProductId())
+               && Objects.equals(name, other.getProductName())
+               && Objects.equals(snapshotDate, other.getProductSnapshotDate())
+               && Objects.equals(type, other.getProductType())
+               && Objects.equals(price, other.getProductPrice());
+    }
 }

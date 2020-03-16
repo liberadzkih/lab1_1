@@ -33,14 +33,19 @@ public class Money {
         return this.getValue().multiply(bigDecimal);
     }
 
-    /*public BigDecimal subtract(BigDecimal bigDecimal)
-    {
-        return this.getValue().subtract(bigDecimal);
-    }*/
-    /*public Money add(BigDecimal discount) {
-        value = value.add(discount);
-        return this;
-    }*/
-
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Money other = (Money) obj;
+        return Objects.equals(currency, other.getCurrency()) && Objects.equals(value, other.getValue());
+    }
 
 }

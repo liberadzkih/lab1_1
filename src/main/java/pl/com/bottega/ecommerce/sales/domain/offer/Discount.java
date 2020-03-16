@@ -20,12 +20,24 @@ public class Discount {
         return cause;
     }
 
-    public BigDecimal getBigDecimalValue(){
-        return value.getValue();
-    }
 
     @Override
     public int hashCode() {
         return Objects.hash(cause,value);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Discount other = (Discount) obj;
+        return Objects.equals(value, other.getDiscount()) && Objects.equals(cause, other.getCause());
     }
 }
