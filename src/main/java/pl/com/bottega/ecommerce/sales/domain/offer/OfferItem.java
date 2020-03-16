@@ -23,21 +23,22 @@ public class OfferItem {
     private Discount discount;
     private Money totalCost;
 
-    /*public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate, String productType,
-            int quantity) {
-        this(productId, productPrice, productName, productSnapshotDate, productType, quantity, null, null);
-    }*/
+    public OfferItem(Product product, int quantity) {
+        this(product, null, quantity,  null);
+    }
 
     public OfferItem(Product product, Discount discount, int quantity,Money totalCost) {
-        this(product,discount,quantity,totalCost);
+        this.product = product;
+        this.discount =discount;
+        this. quantity = quantity;
+        this.totalCost = totalCost;
 
-        BigDecimal discountValue = new BigDecimal(0);
+        /*BigDecimal discountValue = new BigDecimal(0);
         if (discount != null) {
-            discountValue = discountValue.add(discount);
-        }
+            discountValue = discountValue.add(discount.getDiscount().getValue());
+        }*/
 
-        this.totalCost = productPrice.multiply(new BigDecimal(quantity))
-                                     .subtract(discountValue);
+        this.totalCost.setValue(product.getProductPrice().multiply(new BigDecimal(quantity)).subtract(discount.getDiscount().getValue()));
     }
 
     public int getQuantity() {
@@ -76,22 +77,10 @@ public class OfferItem {
         return Objects.equals(product, other.getProduct())
                && Objects.equals(discount, other.getDiscount())
                && Objects.equals(totalCost, other.getTotalCost())
-               //&& Objects.equals(productId, other.productId)
-               //&& Objects.equals(productName, other.productName)
-               //&& Objects.equals(productPrice, other.productPrice)
-               //& Objects.equals(productSnapshotDate, other.productSnapshotDate)
-               //&& Objects.equals(productType, other.productType)
-               && quantity == other.quantity;
-              // && Objects.equals(totalCost, other.totalCost);
+               && getQuantity() == other.getQuantity();
     }
 
-    /**
-     *
-     * @param item
-     * @param delta
-     *            acceptable percentage difference
-     * @return
-     */
+
     public boolean sameAs(OfferItem other, double delta) {
         if (product.getProductPrice() == null) {
             if (other.product.getProductPrice() != null) {
@@ -123,7 +112,7 @@ public class OfferItem {
             return false;
         }
 
-        if (quantity != other.quantity) {
+        if (getQuantity() != other.getQuantity()) {
             return false;
         }
 

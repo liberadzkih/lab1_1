@@ -20,6 +20,10 @@ public class Discount {
         return cause;
     }
 
+    public BigDecimal getBigDecimalValue(){
+        return value.getValue();
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(cause,value);
