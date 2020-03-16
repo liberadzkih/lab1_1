@@ -43,22 +43,13 @@ public class OfferItem {
     private Discount discount;
     private Money totalCost;
 
-    public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate, String productType,
+    /*public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate, String productType,
             int quantity) {
         this(productId, productPrice, productName, productSnapshotDate, productType, quantity, null, null);
-    }
+    }*/
 
-    public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate, String productType,
-            int quantity, BigDecimal discount, String discountCause) {
-        this.productId = productId;
-        this.productPrice = productPrice;
-        this.productName = productName;
-        this.productSnapshotDate = productSnapshotDate;
-        this.productType = productType;
-
-        this.quantity = quantity;
-        this.discount = discount;
-        this.discountCause = discountCause;
+    public OfferItem(Product product, Discount discount, int quantity,Money totalCost) {
+        this(product,discount,quantity,totalCost);
 
         BigDecimal discountValue = new BigDecimal(0);
         if (discount != null) {
@@ -69,7 +60,7 @@ public class OfferItem {
                                      .subtract(discountValue);
     }
 
-    public String getProductId() {
+  /*  public String getProductId() {
         return productId;
     }
 
@@ -87,7 +78,7 @@ public class OfferItem {
 
     public String getProductType() {
         return productType;
-    }
+    }*/
 
     public BigDecimal getTotalCost() {
         return totalCost;
