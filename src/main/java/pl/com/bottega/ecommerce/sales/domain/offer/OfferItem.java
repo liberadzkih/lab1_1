@@ -19,26 +19,29 @@ import java.util.Objects;
 public class OfferItem {
 
     // product
-    private String productId;
+    //private String productId;
 
-    private BigDecimal productPrice;
+    //private BigDecimal productPrice;
 
-    private String productName;
+    //private String productName;
 
-    private Date productSnapshotDate;
+    //private Date productSnapshotDate;
 
-    private String productType;
+    //private String productType;
 
-    private int quantity;
+    //private BigDecimal totalCost;
 
-    private BigDecimal totalCost;
-
-    private String currency;
+    //private String currency;
 
     // discount
-    private String discountCause;
+    //private String discountCause;
 
-    private BigDecimal discount;
+   // private BigDecimal discount;
+
+    private int quantity;
+    private Product product;
+    private Discount discount;
+    private Money totalCost;
 
     public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate, String productType,
             int quantity) {
