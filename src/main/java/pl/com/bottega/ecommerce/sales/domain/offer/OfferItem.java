@@ -48,7 +48,7 @@ public class OfferItem {
         }
 
         this.totalCost = new Money(null, currency);
-        this.totalCost.multiply(quantity).subtract(discountValue);
+        this.totalCost.multiply(quantity).subtract(new Money(discountValue, currency));
     }
 
     public String getProductId() {
@@ -135,34 +135,8 @@ public class OfferItem {
      * @return
      */
     public boolean sameAs(OfferItem other, double delta) {
-        if (getProductPrice() == null) {
-            if (other.getProductPrice() != null) {
-                return false;
-            }
-        } else if (!getProductPrice().equals(other.getProductPrice())) {
-            return false;
-        }
-        if (getProductName() == null) {
-            if (other.getProductName() != null) {
-                return false;
-            }
-        } else if (!getProductName().equals(other.getProductName())) {
-            return false;
-        }
-
-        if (getProductId() == null) {
-            if (other.getProductId() != null) {
-                return false;
-            }
-        } else if (!getProductId().equals(other.getProductId())) {
-            return false;
-        }
-        if (getProductType() == null) {
-            if (other.getProductType() != null) {
-                return false;
-            }
-        } else if (!getProductType().equals(other.getProductType())) {
-            return false;
+        if (!this.product.equals(other.product)) {
+            return true;
         }
 
         if (quantity != other.quantity) {

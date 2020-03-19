@@ -48,8 +48,8 @@ public class Money {
         return this;
     }
 
-    public Money subtract(BigDecimal subtrahend) {
-        this.value = this.value.subtract(subtrahend);
+    public Money subtract(Money subtrahend) {
+        this.value = this.value.subtract(subtrahend.value);
         return this;
     }
 }
