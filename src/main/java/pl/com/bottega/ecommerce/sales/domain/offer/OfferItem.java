@@ -92,11 +92,7 @@ public class OfferItem {
 
     @Override
     public int hashCode() {
-        return Objects.hash(totalCost.getCurrency(), discount.getValue()
-                                                             .getAmount(),
-                discount.getCause(), product.getId(), product.getName(), product.getPrice()
-                                                                                .getAmount(),
-                product.getSnapshotDate(), product.getType(), quantity, totalCost.getAmount());
+        return Objects.hash(totalCost.hashCode(), discount.hashCode(), product.hashCode(), quantity, totalCost.hashCode());
     }
 
     @Override
@@ -111,22 +107,10 @@ public class OfferItem {
             return false;
         }
         OfferItem other = (OfferItem) obj;
-        return Objects.equals(this.totalCost.getCurrency(), other.totalCost.getCurrency())
-               && Objects.equals(discount.getValue()
-                                         .getAmount(),
-                       other.discount.getValue()
-                                     .getAmount())
-               && Objects.equals(discount.getCause(), other.discount.getCause())
-               && Objects.equals(product.getId(), other.product.getId())
-               && Objects.equals(product.getName(), other.product.getName())
-               && Objects.equals(product.getPrice()
-                                        .getAmount(),
-                       other.product.getPrice()
-                                    .getAmount())
-               && Objects.equals(product.getSnapshotDate(), other.product.getSnapshotDate())
-               && Objects.equals(product.getType(), other.product.getType())
+        return discount.equals(other.discount)
+               && product.equals(other.product)
                && quantity == other.quantity
-               && Objects.equals(totalCost, other.totalCost);
+               && totalCost.equals(other.totalCost);
     }
 
     /**
@@ -137,41 +121,7 @@ public class OfferItem {
      * @return
      */
     public boolean sameAs(OfferItem other, double delta) {
-        if (product.getPrice()
-                   .getAmount() == null) {
-            if (other.product.getPrice()
-                             .getAmount() != null) {
-                return false;
-            }
-        } else if (!product.getPrice()
-                           .getAmount()
-                           .equals(other.product.getPrice()
-                                                .getAmount())) {
-            return false;
-        }
-        if (product.getName() == null) {
-            if (other.product.getName() != null) {
-                return false;
-            }
-        } else if (!product.getName()
-                           .equals(other.product.getName())) {
-            return false;
-        }
-
-        if (product.getId() == null) {
-            if (other.product.getId() != null) {
-                return false;
-            }
-        } else if (!product.getId()
-                           .equals(other.product.getId())) {
-            return false;
-        }
-        if (product.getType() == null) {
-            if (other.product.getType() != null) {
-                return false;
-            }
-        } else if (!product.getType()
-                           .equals(other.product.getType())) {
+        if (!product.equals(other.product)) {
             return false;
         }
 
