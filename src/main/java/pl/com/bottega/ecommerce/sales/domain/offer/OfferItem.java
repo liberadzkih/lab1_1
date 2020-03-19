@@ -35,7 +35,7 @@ public class OfferItem {
         this.quantity = quantity;
         this.totalCost = totalCost;
 
-        this.totalCost.setValue(product.getPrice().multiply(new BigDecimal(quantity)).subtract(discount.getValue().getValue()));
+        this.totalCost.setValue(product.getPrice().multiply(quantity).subtract(discount.getValue()).getValue());
     }
 
     public Product getProduct() {

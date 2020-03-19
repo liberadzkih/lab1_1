@@ -13,6 +13,11 @@ public class Money {
         this.currency = currency;
     }
 
+    public Money(BigDecimal value) {
+        this.value = value;
+        this.currency = null;
+    }
+
     public BigDecimal getValue() {
         return value;
     }
@@ -29,8 +34,12 @@ public class Money {
         this.currency = currency;
     }
 
-    public BigDecimal multiply(BigDecimal value) {
-        return this.getValue().multiply(value);
+    public Money multiply(int factor) {
+        return new Money(this.value.multiply(new BigDecimal(factor)));
+    }
+
+    public Money subtract(Money subtrahend) {
+        return new Money(this.value.subtract(subtrahend.value));
     }
 
     @Override public int hashCode() {
