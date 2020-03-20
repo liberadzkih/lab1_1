@@ -10,15 +10,14 @@ public class Money {
     private BigDecimal value;
 
 
-    public Money(BigDecimal value) {
-        value = new BigDecimal(0);
-        this.currency = new String();
+    public Money(BigDecimal value, String currency) {
+        this.value = value;
+        this.currency = currency;
     }
 
     public Money() {
         value = new BigDecimal(0);
     }
-
 
     public String getCurrency() {
         return currency;
@@ -28,12 +27,29 @@ public class Money {
         return value;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public BigDecimal multiply(BigDecimal bigDecimal) {
+        return this.getValue().multiply(bigDecimal);
     }
 
-    public void setValue(BigDecimal value) {
-        this.value = value;
+    @Override
+    public int hashCode() {
+        return Objects.hash(value,currency);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+       Money other = (Money) obj;
+        return Objects.equals(value, other.getValue())
+               && Objects.equals(currency, other.getCurrency());
     }
 
 }

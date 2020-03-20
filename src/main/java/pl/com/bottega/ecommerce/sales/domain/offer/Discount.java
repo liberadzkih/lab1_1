@@ -8,9 +8,9 @@ public class Discount {
     private String cause;
     private Money value;
 
-    public Discount(String cause) {
+    public Discount(String cause, Money value) {
         this.cause = cause;
-        this.value= new Money();
+        this.value = value;
     }
 
     public String getCause() {

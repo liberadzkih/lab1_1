@@ -2,6 +2,7 @@ package pl.com.bottega.ecommerce.sales.domain.offer;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Objects;
 
 public class Product {
 
@@ -11,19 +12,15 @@ public class Product {
     private String productType;
     private Money price;
 
-    public Product(String productId, String productName, Date productSnapshotDate, String productType) {
+    public Product(String productId, String productName, Date productSnapshotDate, String productType, Money price) {
         this.productId = productId;
         this.productName = productName;
         this.productSnapshotDate = productSnapshotDate;
         this.productType = productType;
-        price=new Money();
+        this.price=price;
     }
     public String getProductId() {
         return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
     }
 
     public String getProductName() {
@@ -42,9 +39,30 @@ public class Product {
         return price;
     }
 
-    public void setPrice(Money price) {
-        this.price = price;
+    @Override
+    public int hashCode() {
+        return Objects.hash(productId,productName, productSnapshotDate, productType,price);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Product other = (Product) obj;
+        return Objects.equals(productId, other.getProductId())
+               && Objects.equals(productName, other.getProductName())
+               && Objects.equals(price, other.getPrice())
+               && Objects.equals(productSnapshotDate, other.getProductSnapshotDate())
+               && Objects.equals(productType, other.getProductType());
+    }
+
 
 
 
