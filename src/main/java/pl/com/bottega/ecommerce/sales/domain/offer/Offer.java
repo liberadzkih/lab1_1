@@ -63,7 +63,7 @@ public class Offer {
         if (availableItems.size() != seenOffer.availableItems.size()) {
             return false;
         }
-
+        /*availableItems.containsAll(seenOffer.availableItems);*/
         for (OfferItem item : availableItems) {
             OfferItem sameItem = seenOffer.findItem(item.getProductId());
             if (sameItem == null) {
