@@ -51,7 +51,7 @@ public class OfferItem {
         return quantity;
     }
 
-    public Money getTotalcost() {
+    public Money getTotalCost() {
         return totalCost;
     }
 
@@ -59,7 +59,7 @@ public class OfferItem {
         return product;
     }
 
-    public Discount getDiscount() { return discount; }
+    public String getProductId() { return product.getProductId(); }
 
     @Override
     public int hashCode() {
@@ -80,7 +80,7 @@ public class OfferItem {
         OfferItem other = (OfferItem) obj;
         return Objects.equals(product, other.getProduct())
                && quantity == other.getQuantity()
-               && Objects.equals(totalCost, other.getTotalcost());
+               && Objects.equals(totalCost, other.getTotalCost());
     }
 
     /**
@@ -90,33 +90,11 @@ public class OfferItem {
      * @return
      */
     public boolean sameAs(OfferItem other, double delta) {
-        if (product.getPrice() == null) {
-            if (other.getProduct().getPrice() != null) {
+        if (product == null) {
+            if (other.getProduct() != null) {
                 return false;
             }
-        } else if (!product.getPrice().equals(other.getProduct().getPrice())) {
-            return false;
-        }
-        if (product.getProductName() == null) {
-            if (other.getProduct().getProductName() != null) {
-                return false;
-            }
-        } else if (!product.getProductName().equals(other.getProduct().getProductName())) {
-            return false;
-        }
-
-        if (product.getProductId() == null) {
-            if (other.getProduct().getProductId() != null) {
-                return false;
-            }
-        } else if (!product.getProductId().equals(other.getProduct().getProductId())) {
-            return false;
-        }
-        if (product.getProductType() == null) {
-            if (other.getProduct().getProductType() != null) {
-                return false;
-            }
-        } else if (!product.getProductType().equals(other.getProduct().getProductType())) {
+        } else if (!product.equals(other.getProduct())) {
             return false;
         }
 
@@ -126,11 +104,11 @@ public class OfferItem {
 
         BigDecimal max;
         BigDecimal min;
-        if (totalCost.getValue().compareTo(other.getTotalcost().getValue()) > 0) {
+        if (totalCost.getValue().compareTo(other.getTotalCost().getValue()) > 0) {
             max = totalCost.getValue();
-            min = other.getTotalcost().getValue();
+            min = other.getTotalCost().getValue();
         } else {
-            max = other.getTotalcost().getValue();
+            max = other.getTotalCost().getValue();
             min = totalCost.getValue();
         }
 
