@@ -22,7 +22,6 @@ public class OfferItem {
     private Money totalCost;
     private Product product;
 
-
     private Discount discount;
 
     public OfferItem(Money totalcost, Product product, Discount discount, int quantity) {
@@ -30,7 +29,6 @@ public class OfferItem {
         this.totalCost=totalcost;
         this.product=product;
         this.discount=discount;
-
     }
 
     public OfferItem(String productId, Money productPrice, String productName, Date productSnapshotDate, String productType,
@@ -41,10 +39,12 @@ public class OfferItem {
 
         BigDecimal discountValue = new BigDecimal(0);
         if (discount != null) {
-            discountValue = discountValue.add(discount);
+            discountValue = discountValue.add(discount.getValue());
         }
 
-        this.totalCost = setValue(product.getPrice().multiply(new BigDecimal(quantity)).subtract(discount.getValue()));
+        this.totalCost.setValue(product.getPrice().multiply(new BigDecimal(quantity).subtract(discountValue)));
+
+
     }
 
     public int getQuantity() {

@@ -9,7 +9,6 @@ public class Money {
     private String currency;
     private BigDecimal value;
 
-
     public Money(BigDecimal value, String currency) {
         this.value = value;
         this.currency = currency;
@@ -19,16 +18,14 @@ public class Money {
         value = new BigDecimal(0);
     }
 
+    public void setValue(BigDecimal value) { this.value = value; }
+
     public String getCurrency() {
         return currency;
     }
 
     public BigDecimal getValue() {
         return value;
-    }
-
-    public BigDecimal multiply(BigDecimal bigDecimal) {
-        return this.getValue().multiply(bigDecimal);
     }
 
     @Override
@@ -52,4 +49,7 @@ public class Money {
                && Objects.equals(currency, other.getCurrency());
     }
 
+    public BigDecimal multiply(BigDecimal bigDecimal) {
+        return value.multiply(bigDecimal);
+    }
 }

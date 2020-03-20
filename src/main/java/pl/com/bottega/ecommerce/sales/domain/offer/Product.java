@@ -63,7 +63,4 @@ public class Product {
                && Objects.equals(productType, other.getProductType());
     }
 
-
-
-
 }
