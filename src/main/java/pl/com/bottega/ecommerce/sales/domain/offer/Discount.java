@@ -1,6 +1,7 @@
 package pl.com.bottega.ecommerce.sales.domain.offer;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Discount {
 
@@ -8,24 +9,37 @@ public class Discount {
     private Money value;
 
     public Discount(String cause) {
-        cause = cause;
-        value= new Money();
+        this.cause = cause;
+        this.value= new Money();
     }
 
     public String getCause() {
         return cause;
     }
 
-    public void setCause(String cause) {
-        cause = cause;
-    }
-
     public Money getValue() {
         return value;
     }
 
-    public void setValue(Money value) {
-        this.value = value;
+    @Override
+    public int hashCode() {
+        return Objects.hash(cause,value);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Discount other = (Discount) obj;
+        return (Objects.equals(value, other.getValue())
+               && Objects.equals(cause, other.getCause()));
     }
 
 
