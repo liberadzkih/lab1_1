@@ -39,7 +39,7 @@ public class OfferItem {
         this.discount = new Discount(discountCause, new Money(discount));
 
         this.totalCost = new Money(productPrice).multiply(quantity)
-                .subtract(this.discount);
+                .subtract(this.discount.getValue());
     }
 
     public String getProductId() {
@@ -71,7 +71,7 @@ public class OfferItem {
     }
 
     public BigDecimal getDiscount() {
-        return discount.getValue();
+        return discount.getValue().getValue();
     }
 
     public String getDiscountCause() {

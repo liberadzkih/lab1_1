@@ -18,8 +18,8 @@ public class Discount {
         this.cause = cause;
         this.value = value;
     }
-    public BigDecimal getValue() {
-        return value.getValue();
+    public Money getValue() {
+        return value;
     }
 
     @Override

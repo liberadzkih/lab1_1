@@ -53,7 +53,7 @@ public class Money {
         return new Money(value).multiply(quantity);
     }
 
-    public Money subtract(Discount money) {
+    public Money subtract(Money money) {
         return new Money(value.subtract(money.getValue()));
     }
 }
