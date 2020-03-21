@@ -9,6 +9,11 @@ public class Money {
 
     private String currency;
 
+    public Money(BigDecimal value) {
+        this.value = value;
+        this.currency = null;
+    }
+
     public Money(BigDecimal value, String currency) {
         this.value = value;
         this.currency = currency;
@@ -20,6 +25,16 @@ public class Money {
 
     public String getCurrency() {
         return currency;
+    }
+
+    public Money multiply(int quantity) {
+        BigDecimal newValue = value.multiply(new BigDecimal(quantity));
+        return new Money(newValue,currency);
+    }
+
+    public Money subtract(Money subtrahend) {
+        BigDecimal newValue = value.subtract(subtrahend.getDenomination());
+        return new Money(newValue, currency);
     }
 
     @Override
