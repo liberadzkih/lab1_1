@@ -14,10 +14,6 @@ public class Money {
         this.currency = currency;
     }
 
-    public void setDenomination(BigDecimal value) {
-        this.value = value;
-    }
-
     public BigDecimal getDenomination() {
         return value;
     }
@@ -25,6 +21,8 @@ public class Money {
     public String getCurrency() {
         return currency;
     }
+
+    public
 
     @Override
     public boolean equals(Object o) {
