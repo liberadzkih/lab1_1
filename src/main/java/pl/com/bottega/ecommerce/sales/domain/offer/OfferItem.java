@@ -29,10 +29,10 @@ public class OfferItem {
     private Discount theDiscount;
 
     public OfferItem(Product theProduct, int quantity) {
-        this(theProduct, quantity, null);
+        this(theProduct, quantity, null, null);
     }
 
-    public OfferItem(Product theProduct, int quantity, Discount theDiscount) {
+    public OfferItem(Product theProduct, int quantity, Discount theDiscount, String currency) {
 
         this.theProduct = theProduct;
 
@@ -40,15 +40,9 @@ public class OfferItem {
 
         this.theDiscount = theDiscount;
 
-        BigDecimal discountValue = new BigDecimal(0);
-        if (this.theDiscount.getValue() != null) {
-            discountValue = discountValue.add(theDiscount.getValue().getDenomination());
-        }
-
-        this.totalCost.setDenomination(theProduct.getProductPrice()
-                                                .getDenomination()
-                                                .multiply(new BigDecimal(quantity))
-                                                .subtract(discountValue));
+        this.totalCost = new Money(theProduct.getProductPrice().getDenomination())
+                                .multiply(quantity)
+                                .subtract(theDiscount.getValue());
     }
 
     public String getProductId() {
@@ -122,33 +116,8 @@ public class OfferItem {
      * @return
      */
     public boolean sameAs(OfferItem other, double delta) {
-        if (theProduct.getProductPrice() == null) {
-            if (other.theProduct.getProductPrice() != null) {
-                return false;
-            }
-        } else if (!theProduct.getProductPrice().equals(other.theProduct.getProductPrice())) {
-            return false;
-        }
-        if (theProduct.getProductName() == null) {
-            if (other.theProduct.getProductName() != null) {
-                return false;
-            }
-        } else if (!theProduct.getProductName().equals(other.theProduct.getProductName())) {
-            return false;
-        }
 
-        if (theProduct.getProductId() == null) {
-            if (other.theProduct.getProductId() != null) {
-                return false;
-            }
-        } else if (!theProduct.getProductId().equals(other.theProduct.getProductId())) {
-            return false;
-        }
-        if (theProduct.getProductType() == null) {
-            if (other.theProduct.getProductType() != null) {
-                return false;
-            }
-        } else if (!theProduct.getProductType().equals(other.theProduct.getProductType())) {
+        if(!theProduct.equals(other.theProduct)) {
             return false;
         }
 
