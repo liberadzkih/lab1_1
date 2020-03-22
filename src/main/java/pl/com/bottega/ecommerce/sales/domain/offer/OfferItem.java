@@ -19,87 +19,66 @@ import java.util.Objects;
 public class OfferItem {
 
     // product
-    private String productId;
-
-    private BigDecimal productPrice;
-
-    private String productName;
-
-    private Date productSnapshotDate;
-
-    private String productType;
+    private Product theProduct;
 
     private int quantity;
 
-    private BigDecimal totalCost;
-
-    private String currency;
+    private Money totalCost;
 
     // discount
-    private String discountCause;
+    private Discount theDiscount;
 
-    private BigDecimal discount;
-
-    public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate, String productType,
-            int quantity) {
-        this(productId, productPrice, productName, productSnapshotDate, productType, quantity, null, null);
+    public OfferItem(Product theProduct, int quantity) {
+        this(theProduct, quantity, null, null);
     }
 
-    public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate, String productType,
-            int quantity, BigDecimal discount, String discountCause) {
-        this.productId = productId;
-        this.productPrice = productPrice;
-        this.productName = productName;
-        this.productSnapshotDate = productSnapshotDate;
-        this.productType = productType;
+    public OfferItem(Product theProduct, int quantity, Discount theDiscount, String currency) {
+
+        this.theProduct = theProduct;
 
         this.quantity = quantity;
-        this.discount = discount;
-        this.discountCause = discountCause;
 
-        BigDecimal discountValue = new BigDecimal(0);
-        if (discount != null) {
-            discountValue = discountValue.add(discount);
-        }
+        this.theDiscount = theDiscount;
 
-        this.totalCost = productPrice.multiply(new BigDecimal(quantity))
-                                     .subtract(discountValue);
+        this.totalCost = new Money(theProduct.getProductPrice().getDenomination())
+                                .multiply(quantity)
+                                .subtract(theDiscount.getValue());
     }
 
     public String getProductId() {
-        return productId;
+        return theProduct.getProductId();
     }
 
     public BigDecimal getProductPrice() {
-        return productPrice;
+        return theProduct.getProductPrice().getDenomination();
     }
 
     public String getProductName() {
-        return productName;
+        return theProduct.getProductName();
     }
 
     public Date getProductSnapshotDate() {
-        return productSnapshotDate;
+        return theProduct.getProductSnapshotDate();
     }
 
     public String getProductType() {
-        return productType;
+        return theProduct.getProductType();
     }
 
     public BigDecimal getTotalCost() {
-        return totalCost;
+        return totalCost.getDenomination();
     }
 
     public String getTotalCostCurrency() {
-        return currency;
+        return totalCost.getCurrency();
     }
 
     public BigDecimal getDiscount() {
-        return discount;
+        return theDiscount.getValue().getDenomination();
     }
 
     public String getDiscountCause() {
-        return discountCause;
+        return theDiscount.getDiscountCause();
     }
 
     public int getQuantity() {
@@ -108,8 +87,7 @@ public class OfferItem {
 
     @Override
     public int hashCode() {
-        return Objects.hash(currency, discount, discountCause, productId, productName, productPrice, productSnapshotDate, productType,
-                quantity, totalCost);
+        return Objects.hash(theDiscount, theProduct, quantity, totalCost);
     }
 
     @Override
@@ -124,14 +102,8 @@ public class OfferItem {
             return false;
         }
         OfferItem other = (OfferItem) obj;
-        return Objects.equals(currency, other.currency)
-               && Objects.equals(discount, other.discount)
-               && Objects.equals(discountCause, other.discountCause)
-               && Objects.equals(productId, other.productId)
-               && Objects.equals(productName, other.productName)
-               && Objects.equals(productPrice, other.productPrice)
-               && Objects.equals(productSnapshotDate, other.productSnapshotDate)
-               && Objects.equals(productType, other.productType)
+        return Objects.equals(theDiscount, other.theDiscount)
+               && Objects.equals(theProduct, other.theProduct)
                && quantity == other.quantity
                && Objects.equals(totalCost, other.totalCost);
     }
@@ -144,33 +116,8 @@ public class OfferItem {
      * @return
      */
     public boolean sameAs(OfferItem other, double delta) {
-        if (productPrice == null) {
-            if (other.productPrice != null) {
-                return false;
-            }
-        } else if (!productPrice.equals(other.productPrice)) {
-            return false;
-        }
-        if (productName == null) {
-            if (other.productName != null) {
-                return false;
-            }
-        } else if (!productName.equals(other.productName)) {
-            return false;
-        }
 
-        if (productId == null) {
-            if (other.productId != null) {
-                return false;
-            }
-        } else if (!productId.equals(other.productId)) {
-            return false;
-        }
-        if (productType == null) {
-            if (other.productType != null) {
-                return false;
-            }
-        } else if (!productType.equals(other.productType)) {
+        if(!theProduct.equals(other.theProduct)) {
             return false;
         }
 
@@ -180,12 +127,12 @@ public class OfferItem {
 
         BigDecimal max;
         BigDecimal min;
-        if (totalCost.compareTo(other.totalCost) > 0) {
-            max = totalCost;
-            min = other.totalCost;
+        if (totalCost.getDenomination().compareTo(other.totalCost.getDenomination()) > 0) {
+            max = totalCost.getDenomination();
+            min = other.totalCost.getDenomination();
         } else {
-            max = other.totalCost;
-            min = totalCost;
+            max = other.totalCost.getDenomination();
+            min = totalCost.getDenomination();
         }
 
         BigDecimal difference = max.subtract(min);
