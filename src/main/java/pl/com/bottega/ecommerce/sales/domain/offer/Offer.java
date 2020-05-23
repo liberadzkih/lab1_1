@@ -22,14 +22,16 @@ public class Offer {
         return unavailableItems;
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + (availableItems == null ? 0 : availableItems.hashCode());
         return result;
     }
 
-    @Override public boolean equals(Object obj) {
+    @Override
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
@@ -51,8 +53,10 @@ public class Offer {
     }
 
     /**
+     *
      * @param seenOffer
-     * @param delta     acceptable difference in percent
+     * @param delta
+     *            acceptable difference in percent
      * @return
      */
     public boolean sameAs(Offer seenOffer, double delta) {
@@ -61,7 +65,7 @@ public class Offer {
         }
 
         for (OfferItem item : availableItems) {
-            OfferItem sameItem = seenOffer.findItem(item.getProductId());
+            OfferItem sameItem = seenOffer.findItem(item.getProduct().getId());
             if (sameItem == null) {
                 return false;
             }
@@ -75,7 +79,7 @@ public class Offer {
 
     private OfferItem findItem(String productId) {
         for (OfferItem item : availableItems) {
-            if (item.getProductId().equals(productId)) {
+            if (item.getProduct().getId().equals(productId)) {
                 return item;
             }
         }
