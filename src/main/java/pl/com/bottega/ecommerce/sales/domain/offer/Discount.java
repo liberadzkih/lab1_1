@@ -4,32 +4,32 @@ import java.math.BigDecimal;
 
 public class Discount {
 
-    private String discountCause;
+    private String cause;
 
-    private BigDecimal discount;
+    private BigDecimal value;
 
     private String currency;
 
-    public Discount(String discountCause, BigDecimal discount, String currency) {
-        this.discountCause = discountCause;
-        this.discount = discount;
+    public Discount(String cause, BigDecimal value, String currency) {
+        this.cause = cause;
+        this.value = value;
         this.currency = currency;
     }
 
-    public String getDiscountCause() {
-        return discountCause;
+    public String getCause() {
+        return cause;
     }
 
-    public void setDiscountCause(String discountCause) {
-        this.discountCause = discountCause;
+    public void setCause(String cause) {
+        this.cause = cause;
     }
 
-    public BigDecimal getDiscount() {
-        return discount;
+    public BigDecimal getValue() {
+        return value;
     }
 
-    public void setDiscount(BigDecimal discount) {
-        this.discount = discount;
+    public void setValue(BigDecimal value) {
+        this.value = value;
     }
 
     public String getCurrency() {
