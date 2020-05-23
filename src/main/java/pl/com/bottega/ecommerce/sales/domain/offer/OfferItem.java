@@ -28,25 +28,17 @@ public class OfferItem {
     private String currency;
 
     // discount
-    private String discountCause;
-
-    private BigDecimal discount;
+    private Discount discount;
 
     public OfferItem(Product product, int quantity) {
-        this(product, quantity, null, null);
+        this(product, quantity, null);
     }
 
-    public OfferItem(Product product, int quantity, BigDecimal discount, String discountCause) {
+    public OfferItem(Product product, int quantity, Discount discount) {
         this.product = product;
 
         this.quantity = quantity;
         this.discount = discount;
-        this.discountCause = discountCause;
-
-        BigDecimal discountValue = new BigDecimal(0);
-        if (discount != null) {
-            discountValue = discountValue.add(discount);
-        }
 
         //this.totalCost = productPrice.multiply(new BigDecimal(quantity)).subtract(discountValue);
     }
@@ -75,20 +67,12 @@ public class OfferItem {
         this.currency = currency;
     }
 
-    public BigDecimal getDiscount() {
+    public Discount getDiscount() {
         return discount;
     }
 
-    public void setDiscount(BigDecimal discount) {
+    public void setDiscount(Discount discount) {
         this.discount = discount;
-    }
-
-    public String getDiscountCause() {
-        return discountCause;
-    }
-
-    public void setDiscountCause(String discountCause) {
-        this.discountCause = discountCause;
     }
 
     public int getQuantity() {
@@ -100,7 +84,7 @@ public class OfferItem {
     }
 
     @Override public int hashCode() {
-        return Objects.hash(currency, discount, discountCause, product, quantity, totalCost);
+        return Objects.hash(currency, discount, product, quantity, totalCost);
     }
 
     @Override public boolean equals(Object obj) {
@@ -113,7 +97,6 @@ public class OfferItem {
         OfferItem other = (OfferItem) obj;
         return getCurrency().equals(other.currency)
                && getDiscount().equals(other.discount)
-               && getDiscountCause().equals(other.discountCause)
                && product.equals(other.product)
                && getQuantity() == other.getQuantity()
                && getTotalCost().equals(other.totalCost);
