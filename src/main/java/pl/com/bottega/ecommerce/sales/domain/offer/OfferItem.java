@@ -36,11 +36,15 @@ public class OfferItem {
 
     public OfferItem(Product product, int quantity, Discount discount) {
         this.product = product;
-
         this.quantity = quantity;
         this.discount = discount;
 
-        //this.totalCost = productPrice.multiply(new BigDecimal(quantity)).subtract(discountValue);
+        BigDecimal discountValue = new BigDecimal(0);
+        if (discount != null) {
+            discountValue = discountValue.subtract(discount.getValue());
+        }
+
+        this.totalCost = product.getPrice().multiply(new BigDecimal(quantity)).subtract(discountValue);
     }
 
     public Product getProduct() {
