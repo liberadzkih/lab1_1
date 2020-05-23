@@ -18,16 +18,12 @@ import java.util.Objects;
 
 public class OfferItem {
 
-    // product
     private Product product;
 
     private int quantity;
 
     private Cash totalCost;
 
-    private String currency;
-
-    // discount
     private Discount discount;
 
     public OfferItem(Product product, int quantity) {
@@ -64,14 +60,6 @@ public class OfferItem {
         this.totalCost = totalCost;
     }
 
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
     public Discount getDiscount() {
         return discount;
     }
@@ -88,11 +76,13 @@ public class OfferItem {
         this.quantity = quantity;
     }
 
-    @Override public int hashCode() {
-        return Objects.hash(currency, discount, product, quantity, totalCost);
+    @Override
+    public int hashCode() {
+        return Objects.hash(discount, product, quantity, totalCost);
     }
 
-    @Override public boolean equals(Object obj) {
+    @Override
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
@@ -100,8 +90,7 @@ public class OfferItem {
             return false;
         }
         OfferItem other = (OfferItem) obj;
-        return getCurrency().equals(other.currency)
-               && getDiscount().equals(other.discount)
+        return getDiscount().equals(other.discount)
                && product.equals(other.product)
                && getQuantity() == other.getQuantity()
                && getTotalCost().equals(other.totalCost);
