@@ -6,14 +6,11 @@ public class Discount {
 
     private String cause;
 
-    private BigDecimal value;
+    private Cash value;
 
-    private String currency;
-
-    public Discount(String cause, BigDecimal value, String currency) {
+    public Discount(String cause, Cash value) {
         this.cause = cause;
         this.value = value;
-        this.currency = currency;
     }
 
     public String getCause() {
@@ -24,19 +21,12 @@ public class Discount {
         this.cause = cause;
     }
 
-    public BigDecimal getValue() {
+    public Cash getValue() {
         return value;
     }
 
-    public void setValue(BigDecimal value) {
+    public void setValue(Cash value) {
         this.value = value;
     }
 
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
 }
